@@ -1,16 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Roboto', 'ui-sans-serif', 'system-ui'],
-      },
+export const content = [
+  '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+  '../../storage/framework/views/*.php',
+  '../**/*.blade.php',
+  '../**/*.js', 
+];
+export const theme = {
+  extend: {
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
     },
   },
-  plugins: [],
-}
+};
+export const plugins = [];

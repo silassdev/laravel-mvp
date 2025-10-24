@@ -4,11 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>@yield('title', config('app.name'))</title>
-  @vite(['resources/css/app.css','resources/js/app.js']) <!-- if using Vite -->
+  @vite(['resources/css/app.css','resources/js/app.js']) 
 </head>
 <body class="bg-gray-50 text-gray-800">
   <nav class="p-4 bg-white shadow">
-    <!-- Replace your existing <nav> ... </nav> with this -->
 <nav x-data="{ open: false }" class="bg-white shadow">
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between h-16">
@@ -16,8 +15,8 @@
       <!-- Brand -->
       <div class="flex items-center space-x-4">
         <a href="{{ route('home') }}" class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-slate-800 text-white rounded flex items-center justify-center font-bold">AP</div>
-          <span class="font-semibold text-lg">My Laravel MVP</span>
+          <div class="w-10 h-10 bg-slate-800 text-white rounded flex items-center justify-center font-bold">iC</div>
+          <span class="font-semibold text-lg">ignisCode</span>
         </a>
       </div>
 
@@ -105,7 +104,7 @@
                 class="p-2 rounded focus:outline-none focus:ring">
           <!-- show [=] when closed and X when open -->
           <span x-show="!open" class="flex items-center gap-2">
-            <span class="inline-block font-bold">[=]</span>
+            <span class="inline-block font-bold">=</span>
           </span>
           <span x-show="open" class="flex items-center gap-2" style="display: none;">
             <span class="inline-block font-bold">X</span>
@@ -170,7 +169,6 @@
   </div>
 </nav>
 
-<!-- Alpine (only include if you don't already load it via npm/Vite) -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   </nav>
@@ -183,6 +181,6 @@
     @yield('content')
   </main>
 
-  <footer class="text-center p-6 text-sm text-gray-500">©ignisCode {{ date('Y') }}</footer>
+@include('layouts.footer')
 </body>
 </html>
