@@ -24,13 +24,12 @@
       <div class="flex items-center space-x-4">
         <a href="{{ route('home') }}" class="flex items-center gap-2">
           <div class="w-10 h-10 bg-slate-800 text-white rounded flex items-center justify-center font-bold">iC</div>
-          <span class="font-semibold text-lg">ignisCode</span>
+          <span class="font-semibold text-lg">ignis<span class="text-3xl align-middle">&#60;</span>ode</span>
         </a>
-      </div>
+      </div> 
 
       <!-- Desktop menu -->
       <div class="hidden md:flex items-center space-x-6">
-        <!-- Nav item: Product -->
         <div x-data="{ openDrop: false }" class="relative">
           <button @mouseenter="openDrop = true" @mouseleave="openDrop = false" @click="openDrop = !openDrop"
                   class="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded focus:outline-none focus:ring">
@@ -60,7 +59,6 @@
           <button @mouseenter="openDrop = true" @mouseleave="openDrop = false" @click="openDrop = !openDrop"
                   class="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded focus:outline-none focus:ring">
             <span class="w-9 h-9 bg-gray-100 rounded flex items-center justify-center">
-              <!-- solutions SVG icon -->
               <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M20 21V7a2 2 0 00-2-2H7L4 7v14a2 2 0 002 2h12a2 2 0 002-2zM8 7V5a3 3 0 016 0v2"/>
@@ -84,7 +82,6 @@
           <button @mouseenter="openDrop = true" @mouseleave="openDrop = false" @click="openDrop = !openDrop"
                   class="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded focus:outline-none focus:ring">
             <span class="w-9 h-9 bg-gray-100 rounded flex items-center justify-center">
-              <!-- services SVG icon -->
               <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M12 8c-1.657 0-3 1.343-3 3v1H6v6h12v-6h-3v-1c0-1.657-1.343-3-3-3zM6 6h12"/>
@@ -102,20 +99,17 @@
           </div>
         </div>
 
-        <!-- Contact (kept as-is) -->
         <a href="{{ route('contact.show') }}" class="px-3 py-2 hover:bg-gray-50 rounded text-sm">Contact</a>
       </div>
 
-      <!-- Mobile Hamburger -->
       <div class="md:hidden flex items-center">
         <button @click="open = !open" aria-expanded="false" :aria-expanded="open.toString()"
                 class="p-2 rounded focus:outline-none focus:ring">
-          <!-- show [=] when closed and X when open -->
           <span x-show="!open" class="flex items-center gap-2">
-            <span class="inline-block font-bold">=</span>
+            <span class="inline-block hover:bg-gray-200 text-5xl font-thin text-gray-800">=</span>
           </span>
           <span x-show="open" class="flex items-center gap-2" style="display: none;">
-            <span class="inline-block font-bold">X</span>
+            <span class="inline-block hover:bg-gray-200 text-5xl font-light text-gray-800">x</span>
           </span>
         </button>
       </div>

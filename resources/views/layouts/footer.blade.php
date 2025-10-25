@@ -52,8 +52,7 @@
         <!-- Admin icon  -->
         <div class="mt-6">
           <button type="button"
-            onclick="window.dispatchEvent(new CustomEvent('open-admin')); 
-            console.log('open-admin dispatched')"
+            onclick="window.dispatchEvent(new CustomEvent('open-admin'));"
             class="inline-flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded focus:outline-none focus:ring focus:ring-offset-2 focus:ring-slate-600"
             aria-haspopup="dialog"
           >
