@@ -3,7 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <style>[x-cloak] {display:none!important} </style>
   <title>@yield('title', config('app.name'))</title>
+  <script>
+  window.routes = {
+  adminLogin: "{{ route('admin.login') }}", adminRegister: "{{ route('admin.register') }}"};
+  window.csrf = document.querySelector('meta[name="csrf-token"]').content;
+</script>
+
   @vite(['resources/css/app.css','resources/js/app.js']) 
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -167,11 +175,7 @@
       </nav>
     </div>
   </div>
-</nav>
-
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-  </nav>
+ </nav>
 
   <main class="container mx-auto p-6">
     @if(session('success'))
@@ -181,6 +185,6 @@
     @yield('content')
   </main>
 
-@include('layouts.footer')
-</body>
+ @include('layouts.footer')
+ </body>
 </html>
