@@ -29,3 +29,14 @@
         font-family: 'Roboto', sans-serif;
     }
 }
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280; 
+  opacity: 1; 
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: #9ca3af;
+}

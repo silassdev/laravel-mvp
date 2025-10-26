@@ -109,7 +109,7 @@
             <span class="inline-block hover:bg-gray-200 text-5xl font-thin text-gray-800">=</span>
           </span>
           <span x-show="open" class="flex items-center gap-2" style="display: none;">
-            <span class="inline-block hover:bg-gray-200 text-5xl font-light text-gray-800">x</span>
+            <span class="inline-block hover:bg-gray-200 text-2xl font-light text-gray-800">✕</span>
           </span>
         </button>
       </div>

@@ -138,7 +138,7 @@
     <div class="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
       <div class="px-6 py-4">
         <div class="flex items-center justify-between">
-          <h4 class="text-lg font-semibold" x-text="mode === 'login' ? 'Admin Login' : 'Create Account'"></h4>
+          <h4 class="text-lg text-gray-700 font-semibold" x-text="mode === 'login' ? 'Admin Login' : 'Create Account'"></h4>
           <button @click="open=false" class="text-slate-400">✕</button>
         </div>
 
@@ -148,47 +148,214 @@
           <button :class="mode==='signup' ? 'bg-slate-900 text-white' : 'bg-gray-100'" @click="mode='signup'" class="px-3 py-1 rounded">Sign Up</button>
         </div>
 
-        <!-- form -->
-        <form @submit.prevent="submit" class="mt-4 space-y-3">
-          <template x-if="mode==='signup'">
-            <div class="space-y-3">
-              <div><label class="block text-sm">Full name</label><input x-model="form.fullname" name="fullname" required class="w-full border p-2 rounded"/></div>
-              <div><label class="block text-sm">Username</label><input x-model="form.username" name="username" required class="w-full border p-2 rounded"/></div>
-              <div><label class="block text-sm">Email</label><input x-model="form.email" type="email" name="email" required class="w-full border p-2 rounded"/></div>
-            </div>
-          </template>
+        <form @submit.prevent="submit" class="mt-4 space-y-4">
+  <!-- Signup fields -->
+  <template x-if="mode==='signup'">
+    <div class="space-y-4">
+      <!-- Full name -->
+      <div class="relative w-full">
+        <input
+          x-model="form.fullname"
+          name="fullname"
+          placeholder=" "
+          required
+          class="peer w-full border-2 border-gray-300 rounded-md px-3 pt-5 pb-2 text-base
+           text-gray-900 placeholder-gray-400
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
+  <label
+    class="absolute left-3 top-5 text-gray-500 text-base transition-all duration-200
+           peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400
+           peer-placeholder-shown:text-base
+           peer-focus:top-2 peer-focus:text-xs peer-focus:text-blue-600
+           peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-blue-600" >Full name</label>
+      </div>
 
-          <template x-if="mode==='login'">
-            <div><label class="block text-sm">Email</label><input x-model="form.email" type="email" name="email" required class="w-full border p-2 rounded"/></div>
-          </template>
+      <!-- Username -->
+      <div class="relative w-full">
+        <input
+          x-model="form.username"
+          name="username"
+          placeholder=" "
+          required
+          class="peer w-full border-2 border-gray-300 rounded-md px-3 pt-5 pb-2 text-base
+           text-gray-900 placeholder-gray-400
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
+  <label
+    class="absolute left-3 top-5 text-gray-500 text-base transition-all duration-200
+           peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400
+           peer-placeholder-shown:text-base
+           peer-focus:top-2 peer-focus:text-xs peer-focus:text-blue-600
+           peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-blue-600"
+  >
+          Username
+        </label>
+      </div>
 
-          <div><label class="block text-sm">Password</label><input x-model="form.password" type="password" name="password" required minlength="6" class="w-full border p-2 rounded"/></div>
-          <template x-if="mode==='signup'">
-            <div><label class="block text-sm">Confirm password</label><input x-model="form.password_confirmation" type="password" name="password_confirmation" required minlength="6" class="w-full border p-2 rounded"/></div>
-          </template>
+      <!-- Email -->
+      <div class="relative w-full">
+  <input
+    type="email"
+    x-model="form.email"
+    name="email"
+    placeholder=" "
+    required
+    class="peer w-full border-2 border-gray-300 rounded-md px-3 pt-5 pb-2 text-base
+           text-gray-900 placeholder-gray-400
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
+  <label
+    class="absolute left-3 top-5 text-gray-500 text-base transition-all duration-200
+           peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400
+           peer-placeholder-shown:text-base
+           peer-focus:top-2 peer-focus:text-xs peer-focus:text-blue-600
+           peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-blue-600"
+  >
+    Email
+  </label>
+</div>
+    </div>
+  </template>
 
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <input x-model="form.remember" type="checkbox" id="remember" class="h-4 w-4"/>
-              <label for="remember" class="text-sm">Remember</label>
-            </div>
-            <a href="{{ route('password.request') }}" class="text-sm text-blue-600">Forgot?</a>
-          </div>
+  <!-- Login email -->
+  <template x-if="mode==='login'">
+  <div class="relative w-full">
+  <input
+    type="email"
+    x-model="form.email"
+    name="email"
+    placeholder="Enter your email"
+    required
+    class="peer w-full border-2 border-gray-300 rounded-md px-3 pt-5 pb-2 text-base
+           text-gray-900 placeholder-gray-400
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
+  <label
+    class="absolute left-3 top-5 text-gray-500 text-base transition-all duration-200
+           peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400
+           peer-placeholder-shown:text-base
+           peer-focus:top-2 peer-focus:text-xs peer-focus:text-blue-600
+           peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-blue-600"
+  >
+    Email
+  </label>
+</div>
+  </template>
 
-          <div class="pt-2 relative">
-            <!-- Doughnut loader -->
-            <div x-show="loading" class="absolute right-3 top-1/2 -translate-y-1/2">
-              <svg class="w-7 h-7 animate-spin" viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="15" stroke="#e5e7eb" stroke-width="6" fill="none"></circle>
-                <circle cx="18" cy="18" r="15" stroke="#0f172a" stroke-width="6" stroke-dasharray="80 100" stroke-linecap="round" fill="none"></circle>
-              </svg>
-            </div>
+  <!-- Password -->
+  <div class="relative w-full" x-data="{ show: false }">
+  <input
+    :type="show ? 'text' : 'password'"
+    x-model="form.password"
+    name="password"
+    placeholder="Enter your password"
+    required
+    minlength="6"
+    class="peer w-full border-2 border-gray-300 rounded-md px-3 pt-5 pb-2 text-base
+           text-gray-900 placeholder-gray-400
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
+  <label
+    class="absolute left-3 top-2 text-gray-500 text-sm transition-all duration-200
+           peer-focus:-translate-y-2 peer-focus:text-xs peer-focus:text-blue-600
+           peer-[&:not(:placeholder-shown)]:-translate-y-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-blue-600"
+  >
+    Password
+  </label>
 
-            <button type="submit" class="w-full py-2 rounded bg-slate-900 text-white" :disabled="loading">
-              <span x-text="mode==='login' ? 'Sign in' : 'Create account'"></span>
-            </button>
-          </div>
-        </form>
+  <!-- Toggle button -->
+  <button
+    type="button"
+    @click="show = !show"
+    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+  >
+    <svg x-show="!show" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7
+               -1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+    </svg>
+    <svg x-show="show" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7
+               a9.956 9.956 0 012.042-3.362M9.88 9.88a3 3 0 104.24 4.24M6.1 6.1l11.8 11.8"/>
+    </svg>
+  </button>
+</div>
+
+  <!-- Confirm password (signup only) -->
+  <template x-if="mode==='signup'">
+    <div class="relative w-full" x-data="{ show: false }">
+  <input
+    :type="show ? 'text' : 'password'"
+    x-model="form.password_confirmation"
+    name="password_confirmation"
+    placeholder=" "
+    required
+    minlength="6"
+    class="peer w-full border-2 border-gray-300 rounded-md px-3 pt-5 pb-2 text-base
+           text-gray-900 placeholder-gray-400
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
+  <label
+    class="absolute left-3 top-2 text-gray-500 text-sm transition-all duration-200
+           peer-focus:-translate-y-2 peer-focus:text-xs peer-focus:text-blue-600
+           peer-[&:not(:placeholder-shown)]:-translate-y-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-blue-600"
+  >
+    Confirm password
+  </label>
+
+  <!-- Toggle button -->
+  <button
+    type="button"
+    @click="show = !show"
+    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+  >
+    <svg x-show="!show" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7
+               -1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+    </svg>
+    <svg x-show="show" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7
+               a9.956 9.956 0 012.042-3.362M9.88 9.88a3 3 0 104.24 4.24M6.1 6.1l11.8 11.8"/>
+    </svg>
+  </button>
+</div>
+  </template>
+
+  <!-- Remember + Forgot -->
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <input x-model="form.remember" type="checkbox" id="remember" class="h-4 w-4" />
+      <label for="remember" class="text-sm text-gray-700">Remember me</label>
+    </div>
+    <a href="{{ route('password.request') }}" class="text-sm text-blue-600">Forgot?</a>
+  </div>
+
+  <!-- Submit -->
+  <div class="pt-2 relative">
+    <div x-show="loading" class="absolute right-3 top-1/2 -translate-y-1/2">
+      <svg class="w-7 h-7 animate-spin" viewBox="0 0 36 36">
+        <circle cx="18" cy="18" r="15" stroke="#e5e7eb" stroke-width="6" fill="none"></circle>
+        <circle cx="18" cy="18" r="15" stroke="#0f172a" stroke-width="6" stroke-dasharray="80 100" stroke-linecap="round" fill="none"></circle>
+      </svg>
+    </div>
+
+    <button type="submit" class="w-full py-2 rounded bg-slate-900 text-white" :disabled="loading">
+      <span x-text="mode==='login' ? 'Sign in' : 'Create account'"></span>
+    </button>
+  </div>
+</form>
 
         <!-- small area for errors -->
         <div x-show="error" x-text="error" class="mt-3 text-sm text-red-600"></div>
@@ -197,7 +364,23 @@
   </div>
 
   <!-- Toast -->
-  <div x-show="toast.show" x-transition class = "fixed right-4 bottom -6 z-50 bg-slate-800 text-white px-4 py-2 rounded shadow"
-  x-text="toast.message"></div>
+<div 
+  x-show="toast.show"
+  x-transition
+  :class="toast.type === 'error' ? 'bg-red-600' : 'bg-green-600'"
+  class="fixed top-4 right-4 z-50 w-72 text-white rounded shadow-lg overflow-hidden"
+>
+  <div class="px-4 py-3">
+    <span x-text="toast.message"></span>
+  </div>
+  <div class="h-1 bg-gray-700">
+    <div 
+      class="h-1"
+      :class="toast.type === 'error' ? 'bg-red-400' : 'bg-green-400'"
+      :style="`width: ${toast.progress}%; transition: width linear ${toast.duration}ms;`"
+    ></div>
+  </div>
+</div>
+
 </div>
 </footer>
