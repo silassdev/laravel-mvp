@@ -1,4 +1,4 @@
-# 🚀 Devs Open — Free Laravel MVP (Open Source)
+# 🚀 Devs Open — Free Laravel MVP
 
 A clean, production-minded starter for showcasing **apps, blogs, and custom APIs** — built with **Laravel + MariaDB** and a lightweight frontend stack: **Blade + Tailwind CSS + Alpine.js + Livewire**.  
 Perfect for freelancers or small teams who want a **fast portfolio + blog + admin dashboard** that’s easy to extend.
