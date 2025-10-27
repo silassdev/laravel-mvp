@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class ResetPasswordController extends Controller
 {
@@ -20,8 +22,12 @@ class ResetPasswordController extends Controller
             $request->only('email','password','password_confirmation','token'),
             function($user,$password){ $user->forceFill(['password'=>Hash::make($password)])->save(); Auth::login($user); }
         );
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('home')->with('status','Password reset successful. You are logged in.')
-            : back()->withErrors(['email'=>[__($status)]]);
-    }
+        if ($status === Password::PASSWORD_RESET) {
+            DB::table('password_resets')->where('email', $request->email)->delete();
+        return 
+        redirect()->route('home')->with('status','Password reset successful. You can logged in.');
+       }
+       return 
+       redirect()->route('password.token.invalid');
+   }
 }

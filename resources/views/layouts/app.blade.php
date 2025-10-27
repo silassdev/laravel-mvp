@@ -180,5 +180,57 @@
   </main>
 
  @include('layouts.footer')
+ {{-- Layout: place after footer and before </body> --}}
+
+<script>
+/* --- 1) Dispatch server toast after DOM is ready (safe ordering) --- */
+document.addEventListener('DOMContentLoaded', function(){
+  @if(session('status'))
+    setTimeout(function(){
+      window.dispatchEvent(new CustomEvent('show-global-toast',{ detail: { message: @json(session('status')), type: 'success', duration: 3500 } }));
+    }, 300);
+  @endif
+
+  @if(session('toast_error'))
+    setTimeout(function(){
+      window.dispatchEvent(new CustomEvent('show-global-toast',{ detail: { message: @json(session('toast_error')), type: 'error', duration: 4500 } }));
+    }, 300);
+  @endif
+});
+
+
+(function () {
+  if (!document.getElementById('global-loader')) {
+    var div = document.createElement('div');
+    div.id = 'global-loader';
+    div.style.display = 'none';
+    div.innerHTML = `
+      <div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;background:rgba(0,0,0,0.25)">
+        <svg class="w-16 h-16 animate-spin" viewBox="0 0 36 36" style="width:64px;height:64px">
+          <circle cx="18" cy="18" r="15" stroke="#e5e7eb" stroke-width="6" fill="none"></circle>
+          <circle cx="18" cy="18" r="15" stroke="#0f172a" stroke-width="6" stroke-dasharray="80 100" stroke-linecap="round" fill="none"></circle>
+        </svg>
+      </div>`;
+    document.body.appendChild(div);
+  }
+
+  window.showLoader = function(){
+    var el = document.getElementById('global-loader');
+    if(el) el.style.display = 'block';
+  };
+  window.hideLoader = function(){
+    var el = document.getElementById('global-loader');
+    if(el) el.style.display = 'none';
+  };
+
+
+  document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(()=> window.hideLoader && window.hideLoader(), 120);
+    });
+
+}
+</script>
+
+
  </body>
 </html>

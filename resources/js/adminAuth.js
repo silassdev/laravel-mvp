@@ -14,21 +14,29 @@ export function adminAuth() {
     },
     toast: { show: false, message: '', type: 'success', progress: 100, duration: 3500 },
 
-    // ✅ Single toast method
-    showToast(msg, type = 'success') {
-      this.toast.message = msg
-      this.toast.type = type
-      this.toast.show = true
-      this.toast.progress = 100
-      this.toast.duration = 3500
+    showToast(message, type = 'success', duration =3500) {
+      if(this.toast.raf)
+    cancelAnimationFrame(this.toast.raf);
 
-      this.$nextTick(() => {
-        this.toast.progress = 0
-      })
+      this.toast.message = message;
+      this.toast.type = type;
+      this.toast.duration = duration;
+      this.toast.show = true;
+      this.toast.progress = 100;
+      this.toast.startAt = performance.now();
 
-      setTimeout(() => {
-        this.toast.show = false
-      }, this.toast.duration)
+      const step = (now) => {
+        const elapsed = now - this.toast.startAt;
+        const pct = Math.max(0, 100 - (elapsed / this.toast.duration) * 100);
+        this.toast.progress = pct;
+        if (elapsed < this.toast.duration) {
+          this.toast.raf = requestAnimationFrame(step);
+        } else {
+          this.toast.show = false;
+          this.toast.raf = null;
+        }
+      };
+      this.toast.raf = requestAnimationFrame(step);
     },
 
     init() {
@@ -38,7 +46,11 @@ export function adminAuth() {
           try {
             if (this.$refs?.adminEmail) this.$refs.adminEmail.focus()
           } catch (e) {}
-        })
+        });
+        window.addEventListener('show-global-toast', (e) => {
+          const payload = (e?.detail && typeof e.detail === 'object') ? e.detail : { message: String(e?.detail || '')};
+          this.showToast(payload.message || '', payload.type || 'success', payload.duration || 3500);
+        });
       })
     },
 
@@ -84,7 +96,6 @@ export function adminAuth() {
         console.log('POST', url, res.status, payload)
 
         if (res.ok && payload.ok) {
-          // ✅ Success
           this.form.password = ''
           this.form.password_confirmation = ''
           this.showToast(payload.message || 'Success', 'success')
@@ -94,22 +105,18 @@ export function adminAuth() {
             if (payload.email) this.form.email = payload.email
             this.$nextTick(() => this.$refs?.adminEmail?.focus())
           } else if (this.mode === 'login' && payload.redirect) {
-            // ✅ Redirect after login
             window.location.href = payload.redirect
           }
           return
         }
 
-        // ✅ Validation errors (422)
         if (res.status === 422 && payload?.errors) {
           const first = Object.values(payload.errors)[0]
           this.error = Array.isArray(first) ? first[0] : first
           this.showToast(this.error, 'error')
-          // Notice: we do NOT close the modal here
           return
         }
 
-        // ✅ Other errors
         this.error = payload?.raw || 'Request failed, check console'
         this.showToast(this.error, 'error')
       } catch (err) {

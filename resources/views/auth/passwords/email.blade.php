@@ -8,7 +8,7 @@
       <div class="mb-4 text-red-600">{{ $errors->first() }}</div>
     @endif
 
-    <form method="POST" action="{{ route('password.email') }}">
+    <form id ="paassword-request-form"method="POST" action="{{ route('password.email') }}">
       @csrf
       <label class="block text-sm mb-1">Email</label>
       <input name="email" value="{{ old('email') }}" required type="email" placeholder="you@example.com" class="w-full border p-2 rounded mb-4" />
@@ -18,6 +18,19 @@
 
   {{-- dispatch toast if session status exists --}}
   @if(session('status'))
-    <script>window.dispatchEvent(new CustomEvent('show-global-toast',{detail: @json(session('status')) }));</script>
-  @endif
+<script>
+(function dispatchToast(){
+  var tries = 0;
+  function send(){
+    tries++;
+    try {
+      window.dispatchEvent(new CustomEvent('show-global-toast',{ detail: { message: @json(session('status')), type:'success', duration:3500 } }));
+    } catch(e){ /* ignore */ }
+    // if no listener, try again shortly (max 5 tries)
+    if(tries < 5) setTimeout(send, 150);
+  }
+  document.addEventListener('DOMContentLoaded', send);
+})();
+</script>
+@endif
 @endsection
